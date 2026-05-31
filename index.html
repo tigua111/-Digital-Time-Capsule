@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>數位時光膠囊</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="loading-overlay" id="loadingOverlay" aria-live="polite" aria-label="雲端同步中，請耐心等候">
+    <div class="loading-panel">
+      <div class="loading-spinner" aria-hidden="true"></div>
+      <div class="loading-text">雲端同步中... 請耐心等候</div>
+      <div class="loading-hint flash" id="loadingHint">免費服務器啟動時間會稍久</div>
+    </div>
+  </div>
+  <main class="app-shell">
+    <section class="stage-panel">
+      
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span>
+        </div>
+        <div>
+          <p class="eyebrow">Digital Time Capsule</p>
+          <h1>數位時光膠囊</h1>
+        </div>
+        <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" title="開關音樂">
+          <span aria-hidden="true"></span>
+          音樂
+        </button>
+        <button class="reset-login" id="resetLogin" type="button">重新登入</button>
+      </div>
+
+      <section class="view active" data-view="login" aria-labelledby="login-title">
+        <div class="split">
+          <div class="hero-copy">
+            <h2 id="login-title">把今天的自己，告訴未知的未來。</h2>
+            <p>登入後寫下一封給未來的信，封存成卡片，等倒數歸零再親手挖出來。</p>
+            <div id="googleSignInButton" style="min-height: 44px; margin-top: 20px; z-index: 10;"></div>
+          </div>
+          <div class="capsule-scene login-scene" aria-hidden="true">
+            <div class="sun"></div>
+            <div class="paper-stack">
+              <div class="paper-card card-a"></div>
+              <div class="paper-card card-b"></div>
+              <div class="paper-card card-c"></div>
+            </div>
+            <div class="glass-capsule">
+              <div class="capsule-shine"></div>
+              <div class="tiny-letter"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="profile" aria-labelledby="profile-title">
+        <div class="section-heading">
+          <p class="eyebrow">Profile</p>
+          <h2 id="profile-title">設定基本資料</h2>
+          <p style="font-size: 0.88rem; color: var(--coral); margin-top: 6px; font-weight: 800;">
+            ⚠️ 請務必記得你使用的帳號，並好好保留。
+          </p>
+        </div>
+        
+        <form class="form-grid" id="profileForm">
+          <label>
+            名字
+            <input name="name" type="text" autocomplete="name" required placeholder="例如：呂地瓜">
+          </label>
+          <label>
+            綽號
+            <input name="nickname" type="text" required placeholder="例如：地瓜">
+          </label>
+          <label>
+            生日
+            <input name="birthday" type="date" required>
+          </label>
+          <label>
+            性別
+            <select name="gender" required>
+              <option value="">請選擇</option>
+              <option>女</option>
+              <option>男</option>
+              <option>不透露</option>
+              <option>自行描述</option>
+            </select>
+          </label>
+          <label class="wide">
+            一句話介紹自己
+            <input name="tagline" type="text" placeholder="例如：正在為愛努力的男孩">
+          </label>
+          <button class="primary-btn wide" type="submit">開始書寫</button>
+        </form>
+      </section>
+
+      <section class="view" data-view="write" aria-labelledby="write-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Letter</p>
+          <h2 id="write-title">寫給未來的自己</h2>
+        </div>
+
+        <form id="capsuleForm">
+          <div class="duration-grid" id="durationGrid">
+            <label class="duration-card">
+              <input type="radio" name="duration" value="10s" required checked>
+              <div class="card-content">
+                <span class="time">10 Secs</span>
+                <span class="desc">測試 10 秒</span>
+              </div>
+            </label>
+
+            <label class="duration-card">
+              <input type="radio" name="duration" value="1y" required>
+              <div class="card-content">
+                <span class="time">1 Year</span>
+                <span class="desc">封存一年</span>
+              </div>
+            </label>
+            
+            <label class="duration-card">
+              <input type="radio" name="duration" value="5y" required>
+              <div class="card-content">
+                <span class="time">5 Years</span>
+                <span class="desc">封存五年</span>
+              </div>
+            </label>
+            
+            <label class="duration-card">
+              <input type="radio" name="duration" value="10y" required>
+              <div class="card-content">
+                <span class="time">10 Years</span>
+                <span class="desc">封存十年</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="question-stack">
+            <label>
+              今年的你想對 <span data-duration-word>一年</span> 後的你說些什麼？
+              <textarea name="message" required></textarea>
+            </label>
+            <label>
+              你覺得未來的你會成為怎麼樣的人？(職業、個性、是否交了另一半等)
+              <textarea name="futureSelf" required></textarea>
+            </label>
+            <label>
+              介紹一下現在的自己(說說你最近的狀況，你的心情，或是你想讓未來的自己知道的事情)
+              <textarea name="aboutNow" required></textarea>
+            </label>
+            <label>
+              我希望你在 <span data-duration-word>一年</span> 後的樣子(可以是長相、性格、生活環境等)
+              <textarea name="wishLook" required></textarea>
+            </label>
+            <label>
+              如果未來的我沒有成為現在我想要的樣子，你會對他說什麼？
+              <textarea name="comfort" required></textarea>
+            </label>
+            <label>
+              其他你想跟他說的話(可以多說一點，未來的你會感謝你今天認真寫了這些話給他)
+              <textarea name="extra"></textarea>
+            </label>
+          </div>
+          <button class="primary-btn" type="submit">送出並製作卡片</button>
+        </form>
+      </section>
+
+      <section class="view" data-view="preview" aria-labelledby="preview-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Card Ready</p>
+          <h2 id="preview-title">你的時光卡片完成了</h2>
+        </div>
+        <div class="card-showcase">
+          <article class="memory-card pop-in" id="previewCard"></article>
+        </div>
+        <button class="archive-btn" id="archiveBtn" type="button">封存</button>
+      </section>
+
+      <section class="view" data-view="buried" aria-labelledby="buried-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Archived</p>
+          <h2 id="buried-title">膠囊已靜靜沉睡在土裡，記得察看信箱，時間到了我會提醒你回來看看</h2>
+        </div>
+        <div class="bury-scene" id="buryScene" aria-live="polite">
+          <div class="sky-glow"></div>
+          <div class="envelope-bury" id="envelopeBury">
+            <div class="envelope-flap"></div>
+            <span>TIME</span>
+          </div>
+          <div class="soil back-soil"></div>
+          <div class="soil front-soil"></div>
+          <div class="countdown-sign" id="countdownSign">
+            <strong>倒數計時</strong>
+            <span id="countdownText">--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="ready" aria-labelledby="ready-title">
+        <div class="ready-wrap">
+          <button class="shovel-btn" id="digBtn" type="button" aria-label="把膠囊挖出來">
+            <span class="shovel-icon" aria-hidden="true"></span>
+          </button>
+          <div class="ready-message">
+            <p class="eyebrow">Time is up</p>
+            <h2 id="ready-title">時間到囉~來把膠囊挖出來吧!</h2>
+          </div>
+        </div>
+        <div class="dig-scene" id="digScene" aria-hidden="true">
+          <div class="dig-shovel"></div>
+          <div class="dig-soil"></div>
+          <div class="capsule-rise"></div>
+        </div>
+      </section>
+
+      <section class="view" data-view="envelope" aria-labelledby="envelope-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Delivered</p>
+          <h2 id="envelope-title">過去的你給你留了一份禮物。</h2>
+        </div>
+        <button class="big-envelope" id="openEnvelope" type="button">
+          <span class="big-flap"></span>
+          <span class="open-label">開啟</span>
+        </button>
+      </section>
+
+      <section class="view" data-view="open" aria-labelledby="open-title">
+        <div class="encouragement-layer" id="encouragementLayer" aria-hidden="true"></div>
+        <div class="opening-letter-text" id="openingLetterText" aria-hidden="true">
+          <p id="letterIntroText"></p>
+        </div>
+        
+        <div class="cinematic-overlay" id="cinematicOverlay" aria-hidden="true">
+          <div class="film-grain"></div>
+          <div class="credits-roll" id="creditsRoll"></div>
+          <div class="cinematic-final-line" id="cinematicFinalLine">
+            無論現在的你是過得如何<br>我都為你感到驕傲<br>希望你沒有辜負未來的我
+          </div>
+        </div>
+
+        <div class="final-content" id="finalContent">
+          <div id="captureArea" class="capture-area">
+            <div class="section-heading compact">
+              <p class="eyebrow">Opened</p>
+              <h2 id="open-title">這是當初的你留下的話</h2>
+            </div>
+            <article class="essay-card" id="essayCard"></article>
+            <article class="memory-card opened" id="openedCard"></article>
+          </div>
+          <div class="action-row">
+            <button class="secondary-btn" id="shareShot" type="button">分享截圖</button>
+            <button class="secondary-btn" id="newCapsule" type="button">建立新的膠囊</button>
+          </div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <div class="screenshot-modal" id="screenshotModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="screenshot-backdrop" data-close="true"></div>
+    <div class="screenshot-panel">
+      <button class="screenshot-close" id="closeScreenshotModal" type="button" aria-label="關閉截圖預覽">×</button>
+      <div class="screenshot-body">
+        <div class="screenshot-preview-frame">
+          <img id="screenshotPreviewImage" alt="截圖預覽" />
+        </div>
+        <div class="screenshot-actions">
+          <button id="downloadScreenshotBtn" class="primary-btn">下載圖片</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="shareShotTemplate" style="position: absolute; left: -9999px; top: -9999px; width: 450px; height: 800px; background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); color: #f8fafc; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; font-family: 'Microsoft JhengHei', 'PingFang TC', system-ui, sans-serif; overflow: hidden;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+      <span style="font-size: 14px; letter-spacing: 2px; color: #38bdf8; font-weight: bold;">DIGITAL TIME CAPSULE</span>
+      <span style="font-size: 12px; color: #94a3b8; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 12px;" id="shareDurationLabel">時光膠囊</span>
+    </div>
+
+    <div style="flex: 1; margin: 35px 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
+      <div id="shareEssayBody" style="font-size: 15px; line-height: 1.8; color: #cbd5e1; white-space: pre-wrap; text-align: justify; letter-spacing: 0.5px; display: -webkit-box; -webkit-line-clamp: 13; -webkit-box-orient: vertical; overflow: hidden;"></div>
+    </div>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0, 0, 0, 0.2); border-radius: 14px; padding: 20px; box-sizing: border-box;">
+      <div style="margin-bottom: 12px;">
+        <p style="font-size: 11px; color: #64748b; letter-spacing: 1px; margin: 0 0 6px 0; font-weight: bold;">當時你想對現在自己說的話：</p>
+        <p id="shareFirstMessage" style="font-size: 13px; color: #e2e8f0; margin: 0; font-style: italic; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.5;"></p>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 10px;">
+        <div>
+          <p style="font-size: 11px; color: #64748b; margin: 0 0 2px 0;">封存於</p>
+          <p id="shareCreatedDate" style="font-size: 13px; color: #38bdf8; font-weight: bold; margin: 0;"></p>
+        </div>
+        <span style="font-size: 11px; color: #475569;">© 原點映像工作室製作</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  
+  <audio id="frontMusic" src="放.mp3" loop preload="auto"></audio>
+  <audio id="openMusic" src="錯過.mp3" loop preload="auto"></audio>
+  
+  <script src="https://accounts.google.com/gsi/client" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
