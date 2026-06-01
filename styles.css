@@ -1462,6 +1462,44 @@ fieldset {
     height: min(calc(100vh - 20px), calc((100vw - 20px) * 16 / 9));
     min-height: 0;
   }
+
+  .brand-row {
+    padding: 12px clamp(20px, 4vw, 44px) 0;
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    min-height: auto;
+    align-items: stretch;
+  }
+
+  .hero-copy {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-copy h2 {
+    margin-bottom: 12px;
+  }
+
+  .hero-copy p {
+    max-width: 100%;
+    margin: 0 auto 12px;
+  }
+
+  .hero-copy #googleSignInButton {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .capsule-scene {
+    min-height: 250px;
+    order: 2;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
